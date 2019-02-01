@@ -3,73 +3,56 @@ A react library to render and display excel sheets on webpage
 
 ---
 
-### Prerequisites
-What things you need to install the software and how to install them
+## Installation
 
 ```
-Give examples
+npm install react-excel-renderer --save
 ```
 
-### Installing
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+## Usage
+* Import the primary module *ExcelRenderer* to convert sheet data into JSON format. 
+* Also import *OutTable* to display the obtained JSON into a HTML Table.
 ```
-Give the example
+import {OutTable, ExcelRenderer} from 'react-excel-renderer';
 ```
-
-And repeat
-
+* Provide binary object (blob) of the excel file to be rendered, to the *ExcelRenderer* function to obtain JSON data from sheet
 ```
-until finished
+//let blob be the binary data of the file
+ExcelRenderer(blob, (err, resp) => {
+  //handle fail case here
+  if(err){
+    console.log(err);            
+  }
+  //handle success case here
+  else{
+    this.setState({
+      cols: resp.cols,     //state variable containing columns 
+      rows: resp.rows      //state variable containing all rows obtained from sheet  
+    });
+  }
+}); 
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-Explain what these tests test and why
-
+* Use the OutTable component to render obtained JSON data into HTML table, and provide classnames as props to make table look alike an Excel Sheet
 ```
-Give an example
+<OutTable data={this.state.rows} columns={this.state.cols} tableClassName="ExcelTable2007" tableHeaderRowClass="heading" />
 ```
+* To make this table look more like an excel sheet, follow this article - [Quick CSS Tools to make your web page tables to look just like excel](https://www.cogniview.com/articles-resources/quick-css-tools-for-making-your-web-tables-look-just-like-excel)
 
-### And coding style tests
-Explain what these tests test and why
 
-```
-Give an example
-```
+**Note:** Once the JSON data is obatined, you can also use other options to render them instead of the OutTable component. For example, [CanvasDataGrid](https://github.com/TonyGermaneri/canvas-datagrid) provides various features to render tabular data.
 
-## Deployment
-Add additional notes about how to deploy this on a live system
 
 ## Built With
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [SheetJS](https://github.com/SheetJS/js-xlsx) - The web page sheet framework used
 
-## Contributing
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+**Ashish Deshpande** - *Initial work* - [Ashish's Github Profile](https://github.com/ashishd751)
 
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Special shout out to the guys at **Sheet JS** for developing the parent library
+* High gratitude towards Bernard Bado to help me publish my first npm package
 
