@@ -50,7 +50,7 @@ ExcelRenderer(blob, (err, resp) => {
 **Ashish Deshpande** - *Initial work* - [Ashish's Github Profile](https://github.com/ashishd751)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ashishd751/react-excel-renderer/blob/master/LICENSE) file for details
 
 ## Acknowledgments
 * Special shout out to the guys at **Sheet JS** for developing the parent library
