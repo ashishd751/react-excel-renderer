@@ -1,4 +1,8 @@
 # react-excel-renderer
+![](https://img.shields.io/npm/l/react-excel-renderer.svg?style=flat)
+![](https://img.shields.io/npm/v/react-excel-renderer.svg?style=flat)
+![](https://img.shields.io/npm/dt/react-excel-renderer.svg?style=flat)
+
 A react library to render and display excel sheets on webpage
 
 ---
