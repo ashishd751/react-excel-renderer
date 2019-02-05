@@ -15,22 +15,29 @@ npm install react-excel-renderer --save
 ```
 import {OutTable, ExcelRenderer} from 'react-excel-renderer';
 ```
-* Provide binary object (blob) of the excel file to be rendered, to the *ExcelRenderer* function to obtain JSON data from sheet
+* Place a simple `input` element in the render function of your class and pass an `onChange` handler
 ```
-//let blob be the binary data of the file
-ExcelRenderer(blob, (err, resp) => {
-  //handle fail case here
-  if(err){
-    console.log(err);            
+<input type="file" onChange={this.fileHandler.bind(this)} style={{"padding":"10px"}} />
+```
+* In the `onChange` handler, invoke the `ExcelRenderer` function and provide file object from the event handler to the `ExcelRenderer` function to obtain JSON data from sheet
+```
+  fileHandler = (event) => {
+    let fileObj = event.target.files[0];
+
+    //just pass the fileObj as parameter
+    ExcelRenderer(fileObj, (err, resp) => {
+      if(err){
+        console.log(err);            
+      }
+      else{
+        this.setState({
+          cols: resp.cols,
+          rows: resp.rows
+        });
+      }
+    });               
+
   }
-  //handle success case here
-  else{
-    this.setState({
-      cols: resp.cols,     //state variable containing columns 
-      rows: resp.rows      //state variable containing all rows obtained from sheet  
-    });
-  }
-}); 
 ```
 * Use the OutTable component to render obtained JSON data into HTML table, and provide classnames as props to make table look alike an Excel Sheet
 ```
