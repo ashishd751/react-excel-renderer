@@ -3,6 +3,12 @@ A react library to render and display excel sheets on webpage
 
 ---
 
+## Demo
+* A sample demo can be found - [here](https://ashishd751.github.io/excel-renderer-demo/)
+* You can find code for the demo - [here](https://github.com/ashishd751/excel-renderer-demo)
+
+![](https://github.com/ashishd751/excel-renderer-demo/blob/master/public/DemoSample.gif)
+
 ## Installation
 
 ```
