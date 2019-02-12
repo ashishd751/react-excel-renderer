@@ -1,6 +1,6 @@
 {
   "name": "react-excel-renderer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A react library to render and display excel sheets on webpage",
   "main": "build/index.js",
   "mode": "production",
