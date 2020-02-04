@@ -16,7 +16,7 @@ export class OutTable extends Component {
                 <table className={this.props.tableClassName}  >
                     <tbody>
                         <tr>
-                            {this.props.withZeroColumn && <th className={this.props.tableHeaderRowClass || ""}></th>}
+                            {this.props.withZeroColumn && !this.props.withoutRowNum && <th className={this.props.tableHeaderRowClass || ""}></th>}
                             {
                                 this.props.columns.map((c) =>
                                     <th key={c.key} className={c.key === -1 ? this.props.tableHeaderRowClass : ""}>{c.key === -1 ? "" : c.name}</th>
@@ -24,7 +24,8 @@ export class OutTable extends Component {
 
                             }
                         </tr>
-                        {this.props.data.map((r,i) => <tr key={i}><td key={i} className={this.props.tableHeaderRowClass}>{i}</td>
+                        {this.props.data.map((r,i) => <tr key={i}>
+                            {!this.props.withoutRowNum && <td key={i} className={this.props.tableHeaderRowClass}>{this.props.renderRowNum?this.props.renderRowNum(r,i):i}</td>}
                             {this.props.columns.map(c => <td key={c.key}>{ r[c.key] }</td>)}
                         </tr>)}
                     </tbody>
