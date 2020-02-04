@@ -3,24 +3,25 @@ import XLSX from 'xlsx';
 
 export class OutTable extends Component {
 
-	constructor(props) { 
+	constructor(props) {
         super(props);
         this.state = {
-            
+
         }
     }
 
-	render() { 
+	render() {
         return (
             <div>
-                <table className={this.props.tableClassName}  >                                       
+                <table className={this.props.tableClassName}  >
                     <tbody>
                         <tr>
+                            {this.props.withZeroColumn && <th className={this.props.tableHeaderRowClass || ""}></th>}
                             {
-                                this.props.columns.map((c) => 
+                                this.props.columns.map((c) =>
                                     <th key={c.key} className={c.key === -1 ? this.props.tableHeaderRowClass : ""}>{c.key === -1 ? "" : c.name}</th>
                                 )
-                            
+
                             }
                         </tr>
                         {this.props.data.map((r,i) => <tr key={i}><td key={i} className={this.props.tableHeaderRowClass}>{i}</td>
@@ -29,7 +30,7 @@ export class OutTable extends Component {
                     </tbody>
                 </table>
             </div>
-        ); 
+        );
     }
 }
 
@@ -41,17 +42,17 @@ export function ExcelRenderer(file, callback) {
         /* Parse data */
         var bstr = e.target.result;
         var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
-  
+
         /* Get first worksheet */
         var wsname = wb.SheetNames[0];
         var ws = wb.Sheets[wsname];
-  
+
         /* Convert array of arrays */
         var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
         var cols = make_cols(ws["!ref"]);
-  
+
         var data = { rows: json, cols: cols };
-  
+
         resolve(data);
         return callback(null, data);
       };
@@ -59,12 +60,12 @@ export function ExcelRenderer(file, callback) {
       else reader.readAsArrayBuffer(file);
     });
   }
-  
+
   function make_cols(refstr) {
     var o = [],
       C = XLSX.utils.decode_range(refstr).e.c + 1;
     for (var i = 0; i < C; ++i) {
       o[i] = { name: XLSX.utils.encode_col(i), key: i };
-    }  
+    }
     return o;
   }
