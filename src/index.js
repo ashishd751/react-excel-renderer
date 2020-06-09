@@ -12,7 +12,7 @@ export class OutTable extends Component {
 
 	render() {
         return (
-            <div>
+            <div className={this.props.className}>
                 <table className={this.props.tableClassName}  >
                     <tbody>
                         <tr>
