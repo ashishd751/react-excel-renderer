@@ -19,7 +19,13 @@ export class OutTable extends Component {
                             {this.props.withZeroColumn && !this.props.withoutRowNum && <th className={this.props.tableHeaderRowClass || ""}></th>}
                             {
                                 this.props.columns.map((c) =>
-                                    <th key={c.key} className={c.key === -1 ? this.props.tableHeaderRowClass : ""}>{c.key === -1 ? "" : c.name}</th>
+                                    <th key={c.key} className={c.key === -1 ? this.props.tableHeaderRowClass : ""}>
+                                        {
+                                            this.props.renderColumn
+                                                ? this.props.renderColumn(c)
+                                                : c.key === -1 ? "" : c.name
+                                        }
+                                    </th>
                                 )
 
                             }
