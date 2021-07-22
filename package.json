@@ -31,7 +31,7 @@
     "react": "^16.7.0"
   },
   "dependencies": {
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
