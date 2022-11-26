@@ -26,6 +26,8 @@ import {OutTable, ExcelRenderer} from 'react-excel-renderer';
 <input type="file" onChange={this.fileHandler.bind(this)} style={{"padding":"10px"}} />
 ```
 * In the `onChange` handler, invoke the `ExcelRenderer` function and provide file object from the event handler to the `ExcelRenderer` function to obtain JSON data from sheet
+
+you can add the parameter `worksheet` to pick specific worksheet in the excel file (by his name or is index), the default is the first one. 
 ```
   fileHandler = (event) => {
     let fileObj = event.target.files[0];
