@@ -35,7 +35,7 @@ export class OutTable extends Component {
     }
 }
 
-export function ExcelRenderer(file, callback) {
+export function ExcelRenderer(file, callback, worksheet) {
     return new Promise(function(resolve, reject) {
       var reader = new FileReader();
       var rABS = !!reader.readAsBinaryString;
@@ -44,9 +44,8 @@ export function ExcelRenderer(file, callback) {
         var bstr = e.target.result;
         var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
 
-        /* Get first worksheet */
-        var wsname = wb.SheetNames[0];
-        var ws = wb.Sheets[wsname];
+        /* Get worksheet */
+        var ws = get_worksheet(worksheet);
 
         /* Convert array of arrays */
         var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
@@ -69,4 +68,21 @@ export function ExcelRenderer(file, callback) {
       o[i] = { name: XLSX.utils.encode_col(i), key: i };
     }
     return o;
+  }
+
+  function get_worksheet(worksheet) {
+    /* Get worksheet with default as fisrt worksheet */
+    const default_wsname = wb.SheetNames[0];
+    let pickedWorksheet = wb.Sheets[default_wsname];
+
+    if(worksheet){
+      if(typeof(worksheet) === 'number'){
+        const wsname = wb.SheetNames[worksheet];
+        pickedWorksheet = wb.Sheets[wsname];
+      }else{
+        pickedWorksheet = wb.Sheets[worksheet];
+      }
+    }
+
+    return pickedWorksheet;
   }
